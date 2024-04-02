@@ -1,0 +1,98 @@
+[
+    {
+        "id": 1,
+        "name": "Adventure"
+    },
+    {
+        "id": 2,
+        "name": "RPG"
+    },
+    {
+        "id": 3,
+        "name": "Brawler"
+    },
+    {
+        "id": 4,
+        "name": "Indie"
+    },
+    {
+        "id": 5,
+        "name": "Turn Based Strategy"
+    },
+    {
+        "id": 6,
+        "name": "Platform"
+    },
+    {
+        "id": 7,
+        "name": "Simulator"
+    },
+    {
+        "id": 8,
+        "name": "Strategy"
+    },
+    {
+        "id": 9,
+        "name": "Puzzle"
+    },
+    {
+        "id": 10,
+        "name": "Shooter"
+    },
+    {
+        "id": 11,
+        "name": "Music"
+    },
+    {
+        "id": 12,
+        "name": "Fighting"
+    },
+    {
+        "id": 13,
+        "name": "Arcade"
+    },
+    {
+        "id": 14,
+        "name": "Visual Novel"
+    },
+    {
+        "id": 15,
+        "name": "Card & Board Game"
+    },
+    {
+        "id": 16,
+        "name": "Tactical"
+    },
+    {
+        "id": 17,
+        "name": "Racing"
+    },
+    {
+        "id": 18,
+        "name": "Point-and-Click"
+    },
+    {
+        "id": 19,
+        "name": "MOBA"
+    },
+    {
+        "id": 20,
+        "name": "Sport"
+    },
+    {
+        "id": 21,
+        "name": "Real Time Strategy"
+    },
+    {
+        "id": 22,
+        "name": "Quiz\/Trivia"
+    },
+    {
+        "id": 23,
+        "name": ""
+    },
+    {
+        "id": 24,
+        "name": "Pinball"
+    }
+]
