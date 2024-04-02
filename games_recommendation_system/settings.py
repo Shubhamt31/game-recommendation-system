@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'games_rec',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -74,9 +76,12 @@ WSGI_APPLICATION = 'games_recommendation_system.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    'default':{
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'video_game_db',
+        'USER': 'postgres',
+        'PASSWORD': 'Open@12345',
+        'HOST': 'localhost'
     }
 }
 
