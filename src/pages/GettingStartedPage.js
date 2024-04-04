@@ -4,7 +4,7 @@ import bgImage from '../images/img.png';
 
 const GettingStartedPage = () => {
   const handleClick = () => {
-    window.location.href = '/games';
+    window.location.href = '/search';
   };
 
   return (

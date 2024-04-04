@@ -4,12 +4,13 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, makeStyles } from '@material-ui/core';
 import AdbIcon from '@mui/icons-material/Adb';
 
-// Import your page components here
+import SearchPage from './pages/SearchForm';
 import GettingStartedPage from './pages/GettingStartedPage';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    backgroundColor: '#cc0000',
+    backgroundColor: '#d32f2f',
+    width:'100vw'
   },
 }));
 function App() {
@@ -26,6 +27,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<GettingStartedPage />} />
+          <Route path="/search" element={<SearchPage />} />
         </Routes>
       </div>
     </Router>
