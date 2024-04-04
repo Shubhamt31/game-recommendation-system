@@ -1,0 +1,1 @@
+commands = ['load_init_data']
