@@ -4,19 +4,25 @@ from . import models
 from . import serializers
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.pagination import PageNumberPagination
 from rest_framework import status
 
 
-class GamesViewset(APIView):
+class GamesViewset(APIView, PageNumberPagination):
+    page_size=10
     def get(self, request, id=None):
         if id:
             item = models.Game.objects.get(id=id)
             serializer = serializers.GamesSerializer(item)
             return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
 
-        items = models.Game.objects.all()
-        serializer = serializers.GamesSerializer(items, many=True)
-        return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+        queryset = models.Game.objects.all()
+        title = request.query_params.get('title')
+        if title:
+            queryset = queryset.filter(title__contains=title)
+        results = self.paginate_queryset(queryset, request, view=self)
+        serializer = serializers.GamesSerializer(results, many=True)
+        return self.get_paginated_response(serializer.data)
 
     def post(self, request):
         serializer = serializers.GamesSerializer(data=request.data)
