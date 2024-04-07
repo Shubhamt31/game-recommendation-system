@@ -7,6 +7,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import SearchPage from './pages/SearchForm';
 import GettingStartedPage from './pages/GettingStartedPage';
 import GameCard from './components/GameCard';
+import SearchResult from './pages/SearchResult';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -29,6 +30,7 @@ function App() {
         <Routes>
           <Route path="/" element={<GettingStartedPage />} />
           <Route path="/search" element={<SearchPage />} />
+          <Route path="/search-result" element={<SearchResult />} />
           <Route path="/search/games" element={<GameCard />} />
         </Routes>
       </div>

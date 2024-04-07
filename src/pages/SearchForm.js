@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Checkbox, FormControlLabel, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import bgImage from '../images/img.png';
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
+import { PanoramaSharp, SettingsOutlined } from '@mui/icons-material';
 
 const useStyles = makeStyles((theme) => ({
     
@@ -22,16 +25,28 @@ const useStyles = makeStyles((theme) => ({
 
 const SearchPage = () => {
   const classes = useStyles();
+  const [title, setTitle] = useState()
+  const [selectedGenres, setSelectedGenres] = useState([]);
   const [genres, setGenres] = useState([]);
+  const [games, setGames] = useState([]);
   const [ratings, setRatings] = useState([]);
+  const navigate = useNavigate();
+  const baseUrl = 'http://localhost:8000/api';
+  useEffect(() => {
+    axios.get(`${baseUrl}/genres/`).then((res) => {
+      setGenres(res.data.data)
+    })
 
-
+    axios.get(`${baseUrl}/games/`).then((res) => {
+      setGames(res.data.data)
+    })
+  }, [])
   const handleChange = (event) => {
-    const { name, checked } = event.target;
+    const { value, checked } = event.target;
     if (checked) {
-      setGenres([...genres, name]);
+      setSelectedGenres([...selectedGenres, value]);
     } else {
-      setGenres(genres.filter((genre) => genre !== name));
+      setSelectedGenres(selectedGenres.filter((genre) => genre !== parseInt(value)));
     }
   };
   const handleChangeRating = (event) => {
@@ -45,7 +60,11 @@ const SearchPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('Searching for games with genres:', genres);
+    const params = new URLSearchParams()
+    params.append('genres', selectedGenres);
+    params.append('title', title)
+    params.append('rating', ratings)
+    navigate({pathname: '/search-result', search: '?' + params.toString()})
   };
 
   return (
@@ -83,39 +102,17 @@ const SearchPage = () => {
             label="Search by title"
             variant="outlined"
             fullWidth
+            onChange={(e) => setTitle(e.target.value)}
             margin="normal"
           />
           <div>
             <h5>Genres:</h5>
-            {[
-              'Adventure',
-              'RPG',
-              'Brawler',
-              'Indie',
-              'Turn Based Strategy',
-              'Platform',
-              'Simulator',
-              'Strategy',
-              'Puzzle',
-              'Shooter',
-              'Music',
-              'Fighting',
-              'Arcade',
-              'Visual Novel',
-              'Card & Board Game',
-              'Tactical',
-              'Racing',
-              'Point-and-Click',
-              'MOBA',
-              'Sport',
-              'Real Time Strategy',
-              'Quiz/Trivia',
-              'Pinball',
-            ].map((genre) => (
+            {genres.map((genre) => (
               <FormControlLabel
-                key={genre}
-                control={<Checkbox name={genre} onChange={handleChange} />}
-                label={genre}
+                key={genre.id}
+                control={<Checkbox name='genre' onChange={handleChange} />}
+                value={genre.id}
+                label={genre.name}
               />
             ))}
           <h5>Ratings:</h5>
