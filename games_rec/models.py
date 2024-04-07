@@ -15,7 +15,7 @@ class Game(models.Model):
     times_listed = models.IntegerField()
     number_of_reviews = models.IntegerField()
     genres_raw = ArrayField(models.CharField(max_length=200))
-    genres = models.ManyToManyField(Genre)
+    genres = models.ManyToManyField(Genre, related_name='games')
     summary = models.CharField(null=True, max_length=4000)
     reviews_raw = ArrayField(models.CharField(max_length=2000))
 

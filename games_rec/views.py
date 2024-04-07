@@ -29,7 +29,7 @@ class GamesViewset(APIView, PageNumberPagination):
         queryset = models.Game.objects.all()
         title = request.query_params.get('title')
         if title and title != '':
-            queryset = queryset.filter(title__contains=title)
+            queryset = queryset.filter(title__icontains=title)
 
 
         rating = request.query_params.get('rating')
@@ -41,7 +41,7 @@ class GamesViewset(APIView, PageNumberPagination):
         if genres:
             genres = [i for i in genres if i ]
             if len(genres):
-                queryset = queryset.filter(genres__id=1)
+                queryset = queryset.filter(genres__in=genres)
 
         
         results = self.paginate_queryset(queryset, request, view=self)
