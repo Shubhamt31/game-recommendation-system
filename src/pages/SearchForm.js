@@ -4,10 +4,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import bgImage from '../images/img.png';
 
 const useStyles = makeStyles((theme) => ({
+    
   form: {
     display: 'flex',
     flexDirection: 'column',
-    
     alignItems: 'center',
   },
   button: {
@@ -23,6 +23,8 @@ const useStyles = makeStyles((theme) => ({
 const SearchPage = () => {
   const classes = useStyles();
   const [genres, setGenres] = useState([]);
+  const [ratings, setRatings] = useState([]);
+
 
   const handleChange = (event) => {
     const { name, checked } = event.target;
@@ -30,6 +32,14 @@ const SearchPage = () => {
       setGenres([...genres, name]);
     } else {
       setGenres(genres.filter((genre) => genre !== name));
+    }
+  };
+  const handleChangeRating = (event) => {
+    const { name, checked } = event.target;
+    if (checked) {
+      setRatings([...ratings, name]);
+    } else {
+      setRatings(ratings.filter((rating) => rating !== name));
     }
   };
 
@@ -49,6 +59,8 @@ const SearchPage = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        overflowX:'hidden',
+    overflowY : 'hidden',   
       }}
     >
       <div
@@ -60,6 +72,8 @@ const SearchPage = () => {
           flexDirection: 'column',
           justifyContent: 'center',
           margin:'4rem',
+          overflowX: 'hidden',
+          overflowY : 'hidden',
           alignItems: 'center',
         }}
       >
@@ -104,9 +118,15 @@ const SearchPage = () => {
                 label={genre}
               />
             ))}
-          </div>
-          <div>
-            
+          <h5>Ratings:</h5>
+          {[
+            '5 ','4+ ','3+ ','2+','1'
+          ].map((ratings) =>(
+            <FormControlLabel
+              control={<Checkbox name={ratings} onChange={handleChangeRating} />}
+              label={ratings}
+            />
+          ))}
           </div>
           <Button
             variant="contained"
