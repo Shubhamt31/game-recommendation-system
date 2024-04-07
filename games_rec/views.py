@@ -7,6 +7,16 @@ from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
 from rest_framework import status
 
+class GenreViewset(APIView):
+    def get(self, request, id=None):
+        if id:
+            item = models.Genre.objects.get(id=id)
+            serializer = serializers.GenreSerializer(item)
+            return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+
+        queryset = models.Genre.objects.all().order_by('name')
+        serializer = serializers.GenreSerializer(queryset, many=True)
+        return Response({"status": "success", "data": serializer.data}) 
 
 class GamesViewset(APIView, PageNumberPagination):
     page_size=10
@@ -18,18 +28,20 @@ class GamesViewset(APIView, PageNumberPagination):
 
         queryset = models.Game.objects.all()
         title = request.query_params.get('title')
-        if title:
+        if title and title != '':
             queryset = queryset.filter(title__contains=title)
 
 
         rating = request.query_params.get('rating')
-        if rating:
+        if rating  and rating != '':
             queryset = queryset.filter(rating__range=(float(rating), float(rating) + 0.9))
 
 
         genres = request.query_params.getlist('genres')
         if genres:
-            queryset = queryset.filter(genres__name__in=genres)
+            genres = [i for i in genres if i ]
+            if len(genres):
+                queryset = queryset.filter(genres__id=1)
 
         
         results = self.paginate_queryset(queryset, request, view=self)
