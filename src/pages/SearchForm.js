@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Checkbox, FormControlLabel, TextField } from '@material-ui/core';
+import { Button, Checkbox, FormControlLabel, Radio, RadioGroup, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import bgImage from '../images/img.png';
 import axios from 'axios';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { PanoramaSharp, SettingsOutlined } from '@mui/icons-material';
 
 const useStyles = makeStyles((theme) => ({
-    
+
   form: {
     display: 'flex',
     flexDirection: 'column',
@@ -28,17 +28,12 @@ const SearchPage = () => {
   const [title, setTitle] = useState()
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [genres, setGenres] = useState([]);
-  const [games, setGames] = useState([]);
-  const [ratings, setRatings] = useState([]);
+  const [selectedRating, setSelectedRating] = useState('');
   const navigate = useNavigate();
   const baseUrl = 'http://localhost:8000/api';
   useEffect(() => {
     axios.get(`${baseUrl}/genres/`).then((res) => {
       setGenres(res.data.data)
-    })
-
-    axios.get(`${baseUrl}/games/`).then((res) => {
-      setGames(res.data.data)
     })
   }, [])
   const handleChange = (event) => {
@@ -50,21 +45,27 @@ const SearchPage = () => {
     }
   };
   const handleChangeRating = (event) => {
-    const { name, checked } = event.target;
+    const { value, checked } = event.target;
     if (checked) {
-      setRatings([...ratings, name]);
+      setSelectedRating(parseInt(value));
     } else {
-      setRatings(ratings.filter((rating) => rating !== name));
+      setSelectedRating('');
     }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const params = new URLSearchParams()
-    params.append('genres', selectedGenres);
-    params.append('title', title)
-    params.append('rating', ratings)
-    navigate({pathname: '/search-result', search: '?' + params.toString()})
+    if (selectedGenres.length) {
+      selectedGenres.forEach(genre => params.append('genres', genre))
+    }
+    if (title) {
+      params.append('title', title)
+    }
+    if (selectedRating) {
+      params.append('rating', selectedRating)
+    }
+    navigate({ pathname: '/search-result', search: '?' + params.toString() })
   };
 
   return (
@@ -78,8 +79,8 @@ const SearchPage = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        overflowX:'hidden',
-    overflowY : 'hidden',   
+        overflowX: 'hidden',
+        overflowY: 'hidden',
       }}
     >
       <div
@@ -90,9 +91,9 @@ const SearchPage = () => {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
-          margin:'4rem',
+          margin: '4rem',
           overflowX: 'hidden',
-          overflowY : 'hidden',
+          overflowY: 'hidden',
           alignItems: 'center',
         }}
       >
@@ -115,15 +116,24 @@ const SearchPage = () => {
                 label={genre.name}
               />
             ))}
-          <h5>Ratings:</h5>
-          {[
-            '5 ','4+ ','3+ ','2+','1'
-          ].map((ratings) =>(
-            <FormControlLabel
-              control={<Checkbox name={ratings} onChange={handleChangeRating} />}
-              label={ratings}
-            />
-          ))}
+            <h5>Ratings:</h5>
+            <RadioGroup
+              value={selectedRating}
+              onChange={(e) => handleChangeRating(e)}
+              name='ratings'
+              row
+            >
+              {[
+                { label: '5 ', value: 5 }, { label: '4+ ', value: 4 }, { label: '3+ ', value: 3 }, { label: '2+', value: 2 }, { label: '1', value: 1 }
+              ].map((rating) => (
+                <FormControlLabel
+                  key={rating.value}
+                  value={rating.value}
+                  control={<Radio />}
+                  label={rating.label}
+                />
+              ))}
+            </RadioGroup>
           </div>
           <Button
             variant="contained"
