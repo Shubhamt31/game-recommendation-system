@@ -20,6 +20,18 @@ class GamesViewset(APIView, PageNumberPagination):
         title = request.query_params.get('title')
         if title:
             queryset = queryset.filter(title__contains=title)
+
+
+        rating = request.query_params.get('rating')
+        if rating:
+            queryset = queryset.filter(rating__range=(float(rating), float(rating) + 0.9))
+
+
+        genres = request.query_params.getlist('genres')
+        if genres:
+            queryset = queryset.filter(genres__name__in=genres)
+
+        
         results = self.paginate_queryset(queryset, request, view=self)
         serializer = serializers.GamesSerializer(results, many=True)
         return self.get_paginated_response(serializer.data)
