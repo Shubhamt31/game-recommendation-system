@@ -1,1 +1,1 @@
-commands = ['load_init_data']
+commands = ['load_init_data', 'load_images']

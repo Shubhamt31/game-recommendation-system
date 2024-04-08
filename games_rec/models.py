@@ -18,6 +18,7 @@ class Game(models.Model):
     genres = models.ManyToManyField(Genre, related_name='games')
     summary = models.CharField(null=True, max_length=4000)
     reviews_raw = ArrayField(models.CharField(max_length=2000))
+    image_url=models.CharField(max_length=2000, null=True)
 
 class Review(models.Model):
     comment = models.CharField(max_length=4000)
