@@ -76,11 +76,11 @@ const SearchPage = () => {
         backgroundImage: `url(${bgImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        height:'100%',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        overflowX: 'hidden',
-        overflowY: 'hidden',
+
       }}
     >
       <div

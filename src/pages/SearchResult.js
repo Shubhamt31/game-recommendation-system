@@ -6,6 +6,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useSearchParams } from 'react-router-dom';
 import GameCard from '../components/GameCard';
+import Pagination from '@mui/material/Pagination'
+
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -53,12 +55,10 @@ const SearchResult = () => {
         backgroundImage: `url(${bgImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        height:'inherit',
+        height:'100%',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        overflowX: 'hidden',
-        overflowY: 'hidden',
       }}
     >
       <div
@@ -73,7 +73,7 @@ const SearchResult = () => {
           maxWidth: '1200px',
           padding: '2rem',
           boxSizing: 'border-box',
-          margin:'20px'
+          margin:'40px'
         }}
       >
         <h1>Top Results:</h1>
@@ -84,6 +84,7 @@ const SearchResult = () => {
             </Grid>
           ))}
         </Grid>
+        <Pagination count={10} color="error" />
         <Button
           variant="contained"
           className={classes.button}
