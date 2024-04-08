@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
 from rest_framework import status
+from .scrape_images import scrape_first_image
 
 class GenreViewset(APIView):
     def get(self, request, id=None):
@@ -19,7 +20,11 @@ class GenreViewset(APIView):
         return Response({"status": "success", "data": serializer.data}) 
 
 class GamesViewset(APIView, PageNumberPagination):
-    page_size=10
+    page_size=8
+
+    def get_image_url(self, game_name):
+        return scrape_first_image(game_name)
+    
     def get(self, request, id=None):
         if id:
             item = models.Game.objects.get(id=id)
@@ -46,7 +51,12 @@ class GamesViewset(APIView, PageNumberPagination):
         
         results = self.paginate_queryset(queryset, request, view=self)
         serializer = serializers.GamesSerializer(results, many=True)
-        return self.get_paginated_response(serializer.data)
+        serialized_data = serializer.data
+        for game_data in serialized_data:
+            game_name = game_data.get('title') 
+            if game_name:
+                game_data['image_url'] = self.get_image_url(game_name)
+        return self.get_paginated_response(serialized_data)
 
     def post(self, request):
         serializer = serializers.GamesSerializer(data=request.data)
