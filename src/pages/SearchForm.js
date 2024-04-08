@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import bgImage from '../images/img.png';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { PanoramaSharp, SettingsOutlined } from '@mui/icons-material';
+
 
 const useStyles = makeStyles((theme) => ({
 
@@ -68,14 +68,14 @@ const SearchPage = () => {
     navigate({ pathname: '/search-result', search: '?' + params.toString() })
   };
 
+  
+
   return (
     <div
       style={{
         backgroundImage: `url(${bgImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        height: '100vh',
-        width: '100vw',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',

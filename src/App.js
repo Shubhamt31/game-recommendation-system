@@ -12,7 +12,7 @@ import SearchResult from './pages/SearchResult';
 const useStyles = makeStyles((theme) => ({
   appBar: {
     backgroundColor: '#d32f2f',
-    width:'100vw'
+    
   },
 }));
 function App() {

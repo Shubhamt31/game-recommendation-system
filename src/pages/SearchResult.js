@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { Button, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import bgImage from '../images/img.png';
 import axios from 'axios';
-import {  useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import GameCard from '../components/GameCard';
 
 const useStyles = makeStyles((theme) => ({
-    
   form: {
     display: 'flex',
     flexDirection: 'column',
@@ -19,14 +21,25 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: '#b71c1c',
     },
   },
+  gridContainer: {
+    padding: '2rem',
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column',
+    },
+  },
+  gridItem: {
+    marginBottom: '2rem',
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: '1rem',
+    },
+  },
 }));
 
 const SearchResult = () => {
   const classes = useStyles();
   const [ params ] = useSearchParams();
-  const [genres, setGenres] = useState([]);
   const [games, setGames] = useState([]);
-  const [ratings, setRatings] = useState([]);
+  const navigate = useNavigate();
   const baseUrl = 'http://localhost:8000/api';
   useEffect(() => {
     axios.get(`${baseUrl}/games`, {params}).then((res) => {
@@ -34,7 +47,54 @@ const SearchResult = () => {
     })
   }, [params])
 
-  return games.map((game) => (<GameCard key={game.id} game={game} />));
+  return (
+    <div
+      style={{
+        backgroundImage: `url(${bgImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        height:'inherit',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        overflowX: 'hidden',
+        overflowY: 'hidden',
+      }}
+    >
+      <div
+        style={{
+          backgroundColor: 'rgba(255, 255, 255, 0.90)',
+          borderRadius: '1rem',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '80%',
+          maxWidth: '1200px',
+          padding: '2rem',
+          boxSizing: 'border-box',
+          margin:'20px'
+        }}
+      >
+        <h1>Top Results:</h1>
+        <Grid container spacing={1} className={classes.gridContainer}>
+          {games.map((game) => (
+            <Grid item xs={12} sm={6} md={3} key={game.id} className={classes.gridItem}>
+              <GameCard game={game} />
+            </Grid>
+          ))}
+        </Grid>
+        <Button
+          variant="contained"
+          className={classes.button}
+          size="large"
+          onClick={() => navigate('/search')}
+        >
+          Back to Search
+        </Button>
+      </div>
+    </div>
+  );
 };
 
 export default SearchResult;
