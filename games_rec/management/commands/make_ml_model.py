@@ -35,6 +35,5 @@ class Command(BaseCommand):
 
         # pickle.dump(summary_similarity_matrix, 'data/summar_matrix.pd', 'wb')
         # pickle.dump(genre_similarity_matrix, 'data/summar_matrix.pd', 'wb')
-        print(recommended_games)
 
 
