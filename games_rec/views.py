@@ -6,14 +6,14 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
 from rest_framework import status
-from .scrape_images import scrape_first_image
+import pickle
 
 class GenreViewset(APIView):
     def get(self, request, id=None):
         if id:
             item = models.Genre.objects.get(id=id)
             serializer = serializers.GenreSerializer(item)
-            return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+            return Response({"status": "success", "data": serializer.data }, status=status.HTTP_200_OK)
 
         queryset = models.Genre.objects.all().order_by('name')
         serializer = serializers.GenreSerializer(queryset, many=True)
@@ -22,14 +22,26 @@ class GenreViewset(APIView):
 class GamesViewset(APIView, PageNumberPagination):
     page_size=8
 
-    def get_image_url(self, game_name):
-        return scrape_first_image(game_name)
-    
     def get(self, request, id=None):
         if id:
             item = models.Game.objects.get(id=id)
             serializer = serializers.GamesSerializer(item)
-            return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+            df = None
+            combined_matrix = None
+            with open('data/games_df.pkl', 'rb') as f:
+                df = pickle.load(f)
+            with open('data/combined_similarity.pkl', 'rb') as f:
+                combined_matrix = pickle.load(f)
+
+            title_index = df[df['id'] == 1].index[0]
+
+            similarity = combined_matrix[title_index]
+
+            similar_game_indices = similarity.argsort()[::-1][1:10]
+            recommended_games_id = df.iloc[similar_game_indices]['id'].tolist()
+            recommended_games = models.Game.objects.filter(id__in=recommended_games_id)
+            recommended_serializer = serializers.GamesSerializer(recommended_games, many=True)
+            return Response({"status": "success", "data": serializer.data, "recommended_games": recommended_serializer.data}, status=status.HTTP_200_OK)
 
         queryset = models.Game.objects.all()
         title = request.query_params.get('title')
@@ -51,12 +63,7 @@ class GamesViewset(APIView, PageNumberPagination):
         
         results = self.paginate_queryset(queryset, request, view=self)
         serializer = serializers.GamesSerializer(results, many=True)
-        serialized_data = serializer.data
-        for game_data in serialized_data:
-            game_name = game_data.get('title') 
-            if game_name:
-                game_data['image_url'] = self.get_image_url(game_name)
-        return self.get_paginated_response(serialized_data)
+        return self.get_paginated_response(serializer.data)
 
     def post(self, request):
         serializer = serializers.GamesSerializer(data=request.data)

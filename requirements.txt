@@ -1,10 +1,15 @@
 asgiref==3.8.1
+beautifulsoup4==4.12.3
 Django==5.0.3
 django-cors-headers==4.3.1
 django-rest-framework==0.1.0
 djangorestframework==3.15.1
+numpy==1.26.4
+pandas==2.2.2
 psycopg2==2.9.9
 python-dotenv==1.0.1
+requests==2.31.0
+scikit-learn==1.4.2
 setuptools==69.1.1
 sqlparse==0.4.4
 wheel==0.43.0

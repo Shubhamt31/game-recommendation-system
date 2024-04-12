@@ -1,4 +1,5 @@
 FROM python:3.12
+
 ENV APP_HOME=/app
 ENV APP_USER=runner
 
@@ -18,7 +19,7 @@ COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-ENV PATH="${PATH}:/app/.local/bin"
+ENV PATH="${PATH}:/app/.local/bin:/home/${APP_USER}/.local/bin"
 
 COPY . .
 EXPOSE 8000
