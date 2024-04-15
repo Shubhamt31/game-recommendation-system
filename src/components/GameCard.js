@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, CardMedia, CardContent, Typography, Rating } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-// import fifa from '../images/fifa.png'
 
 const GameCard = ({game}) => {
   const {id, title,image_url, rating } = game;

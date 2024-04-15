@@ -1,11 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CardMedia, CardContent, Typography, Rating } from '@mui/material';
-import { Button, Divider } from '@material-ui/core';
-import { useNavigate } from 'react-router-dom';
+import { Button, Divider, Grid } from '@material-ui/core';
+import { useNavigate,useParams } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import GameCard from '../components/GameCard';
+import axios from 'axios';
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    marginTop: '1rem',
+    backgroundColor: '#d32f2f',
+    color: '#ffffff',
+    '&:hover': {
+      backgroundColor: '#b71c1c',
+    },
+}}));
 
 const GameDetailCard = ({ game }) => {
-  const { id, title, summary, image_url, rating, reviews_raw } = game;
+  const { title, summary, image_url, rating, reviews_raw } = game;
+  const [recomendations,setRecomendations] = useState([]);
+  const { id } = useParams();
+  const classes = useStyles();
   const navigate = useNavigate();
+  const baseUrl = 'http://localhost:8000/api';
+  useEffect(() => {
+    axios.get(`${baseUrl}/games/${id}`).then((res) => {
+      setRecomendations(res.data.recommended_games);
+    })
+  }, [id])
   return (
     <Card>
       <CardMedia component="img" height="360" image={image_url} alt={title} />
@@ -27,7 +49,19 @@ const GameDetailCard = ({ game }) => {
             </React.Fragment>)}
           </CardContent>
         </Card>
-        <Button onClick={() => navigate(-1)}>Go Back to Search Result</Button>
+        <div>
+          <h3>Recomendations:</h3>
+          <Grid container spacing={1} className={classes.gridContainer}>
+          {recomendations.map((recomendation) => (
+            <Grid item xs={12} sm={6} md={3} key={recomendation.id} className={classes.gridItem}>
+              <GameCard game={recomendation} />
+            </Grid>
+          ))}
+          </Grid>
+        </div>
+        <Button variant="contained"
+          className={classes.button}
+          size="large" onClick={() => navigate(-1)}>Go Back to Search Result</Button>
       </CardContent>
     </Card>
   );
