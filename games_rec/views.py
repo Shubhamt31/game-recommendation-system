@@ -33,11 +33,11 @@ class GamesViewset(APIView, PageNumberPagination):
             with open('data/combined_similarity.pkl', 'rb') as f:
                 combined_matrix = pickle.load(f)
 
-            title_index = df[df['id'] == 1].index[0]
+            curr_index = df[df['id'] == id].index[0]
 
-            similarity = combined_matrix[title_index]
+            similarity = combined_matrix[curr_index]
 
-            similar_game_indices = similarity.argsort()[::-1][1:10]
+            similar_game_indices = similarity.argsort()[::-1][1:9]
             recommended_games_id = df.iloc[similar_game_indices]['id'].tolist()
             recommended_games = models.Game.objects.filter(id__in=recommended_games_id)
             recommended_serializer = serializers.GamesSerializer(recommended_games, many=True)
@@ -64,26 +64,3 @@ class GamesViewset(APIView, PageNumberPagination):
         results = self.paginate_queryset(queryset, request, view=self)
         serializer = serializers.GamesSerializer(results, many=True)
         return self.get_paginated_response(serializer.data)
-
-    def post(self, request):
-        serializer = serializers.GamesSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
-        else:
-            return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
-
-    def patch(self, request, id=None):
-        item = models.Game.objects.get(id=id)
-        serializer = serializers.GamesSerializer(item, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
-        else:
-            return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
-
-    def delete(self, request, id=None):
-        item = models.Game.objects.filter(id=id)
-        print(item)
-        item.delete()
-        return Response({"status": "success", "data": "Item Deleted"})

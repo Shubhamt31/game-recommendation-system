@@ -8,7 +8,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         games = Game.objects.all()
+        
         for game in games:
+            if game.image_url:
+                continue
             search_url = f'https://images.search.yahoo.com/search/images;_ylt=Awr.170.whNmDr4U4gdXNyoA;_ylu=Y29sbwNncTEEcG9zAzEEdnRpZAMEc2VjA3BpdnM-?p={game.title}+vidieo+game&fr2=piv-web&fr=yfp-t-s#id=0&iurl=https%3A%2F%2Fstatic.bandainamcoent.eu%2Fhigh%2Felden-ring%2Felden-ring%2F00-page-setup%2Felden-ring-new-header-mobile.jpg&action=close'  
             response = requests.get(search_url)
             print(game.id)
