@@ -1,70 +1,50 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Logo](https://res.cloudinary.com/dnzbo3wfx/image/upload/c_thumb,w_200,g_face/v1713116986/Screenshot_2024-04-14_231739_w4v9dr.png)
 
-## Available Scripts
 
-In the project directory, you can run:
+# Game Scout Frontend
 
-### `npm start`
+Welcome to Game Scout - your ultimate destination for discovering new games and making informed choices! Our frontend interface provides a seamless and intuitive experience for users to explore a vast array of games, complete with summaries, reviews, ratings, and personalized suggestions powered by cutting-edge machine learning models.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## About Game Scout
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Game Scout is more than just a game scouting website - it's your go-to platform for finding your next gaming adventure. Whether you're a hardcore gamer seeking the latest releases or a casual player looking for hidden gems, Game Scout has got you covered.
 
-### `npm test`
+## Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Game Recommendation: Utilizes game summaries and genres for recommendations.
+- Hybrid Similarity Scoring: Converts textual data to numerical representations, calculates game similarity via Cosine Similarity, and blends summary and genre similarities for personalized recommendations.
+- Filtering and Searching: Additional features for enhanced user experience.
+- Django Integration: Seamlessly integrates with Django web framework.
+- PostgreSQL Database: Stores game data for efficient retrieval and management.
+ 
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Screenshots
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![App Screenshot](https://res.cloudinary.com/dnzbo3wfx/image/upload/v1713119962/Screenshot_2024-04-15_000508_fzbpe7.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![App Screenshot](https://res.cloudinary.com/dnzbo3wfx/image/upload/v1713119962/Screenshot_2024-04-15_000528_fbxu9d.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![App Screenshot](https://res.cloudinary.com/dnzbo3wfx/image/upload/v1713119963/Screenshot_2024-04-15_000642_mxnk3z.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![App Screenshot](https://res.cloudinary.com/dnzbo3wfx/image/upload/v1713119965/Screenshot_2024-04-15_000757_zp6bcs.png)
 
-## Learn More
+![App Screenshot](https://res.cloudinary.com/dnzbo3wfx/image/upload/v1713119964/Screenshot_2024-04-15_000738_kuuhqr.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Demo
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+https://res.cloudinary.com/dnzbo3wfx/video/upload/v1713119545/Recording_2024-04-14_235943_zqdhme.mp4
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Installation
 
-### Analyzing the Bundle Size
+If you wish to use Windows as the host, it's a good idea to read through the
+https://docs.docker.com/desktop/install/windows-install/
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Once the docker is installed, go to the project directory and do `docker-compose up`.
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    
