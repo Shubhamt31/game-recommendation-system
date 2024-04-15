@@ -25,7 +25,7 @@ Game Scout is more than just a game scouting website - it's your go-to platform 
 
 ## Screenshots
 
-![App Screenshot](https://res.cloudinary.com/dnzbo3wfx/image/upload/v1713119962/Screenshot_2024-04-15_000508_fzbpe7.png)
+![App Screenshot](https://res.cloudinary.com/dnzbo3wfx/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1713119962/Screenshot_2024-04-15_000508_fzbpe7.png)
 
 ![App Screenshot](https://res.cloudinary.com/dnzbo3wfx/image/upload/v1713119962/Screenshot_2024-04-15_000528_fbxu9d.png)
 
@@ -33,7 +33,7 @@ Game Scout is more than just a game scouting website - it's your go-to platform 
 
 ![App Screenshot](https://res.cloudinary.com/dnzbo3wfx/image/upload/v1713119965/Screenshot_2024-04-15_000757_zp6bcs.png)
 
-![App Screenshot](https://res.cloudinary.com/dnzbo3wfx/image/upload/v1713119964/Screenshot_2024-04-15_000738_kuuhqr.png)
+![App Screenshot](https://res.cloudinary.com/dnzbo3wfx/image/upload/w_1000,ar_16:9,c_fill,g_auto,e_sharpen/v1713119964/Screenshot_2024-04-15_000738_kuuhqr.png)
 
 ## Demo
 
