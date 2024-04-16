@@ -21,15 +21,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 ENV PATH="${PATH}:/app/.local/bin:/home/${APP_USER}/.local/bin"
 
-USER root
 COPY . .
 EXPOSE 8000
-COPY init-app.sh ./
-
-RUN chown -R $APP_USER:$APP_USER ./
-
-RUN chown $APP_USER:$APP_USER init-app.sh
-
-USER $APP_USER
-RUN chmod +x init-app.sh
-RUN ls -la
