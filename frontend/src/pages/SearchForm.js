@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import bgImage from '../images/img.png';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import config from '../config';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -30,7 +31,7 @@ const SearchPage = () => {
   const [genres, setGenres] = useState([]);
   const [selectedRating, setSelectedRating] = useState('');
   const navigate = useNavigate();
-  const baseUrl = 'http://localhost:8000/api';
+  const baseUrl = config.backendURL;
   useEffect(() => {
     axios.get(`${baseUrl}/genres/`).then((res) => {
       setGenres(res.data.data)

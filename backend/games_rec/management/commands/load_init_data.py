@@ -16,23 +16,26 @@ class Command(BaseCommand):
         """
         # Load genres from JSON and create Genre objects
         with open('data/genres.json', 'r') as file:
+            print('Loading genress...')
             genres_input = json.load(file)
             genres = []
             for item in genres_input:
                 if item['name']:
-                    genres.append(Genre(name=item['name'], id=item['id']))
-            try:
-                Genre.objects.bulk_create(genres)
-            except:
-                pass
+                    exists = Genre.objects.filter(name=item['name']).first()
+                    if not exists:
+                        genres.append(Genre(name=item['name'], id=item['id']))
+            Genre.objects.bulk_create(genres)
+            print('Genres Loaded')
         
         # Load organizations from JSON and create Organization objects
         with open('data/organizations.json', 'r') as file:
             organizations_input = json.load(file)
             organizations = []
             for item in organizations_input:
-                organizations.append(Organization(name=item['name'], id=item['id']))
-            Organization.objects.bulk_create(organizations)
+                if item['name']:
+                    exists = Organization.objects.filter(name=item['name']).first()
+                    if not exists:
+                        organizations.append(Organization(name=item['name'], id=item['id']))
             
         # Load games from JSON and create Game objects
         with open('data/games.json', 'r') as file:
@@ -54,8 +57,9 @@ class Command(BaseCommand):
                         plays=item['plays'],
                         playing=item['playing'],
                         backlogs=item['backlogs'],
-                        wishlist=item['wishlist'],
+                        wishlist=item['wisthlist'],
                         reviews_raw=item['reviews'],
+                        image_url=item['image_url'],
                     )
                     # Add organizations to the game
                     for name in item['organizations']:
@@ -69,4 +73,7 @@ class Command(BaseCommand):
                             game.genres.add(genre)
                     # Create reviews for the game
                     for comment in item['reviews']:
-                        Review.objects.create(comment=comment, game=game)
+                        review = Review.objects.filter(comment=comment,game=game).first()
+                        if not review:
+                            Review.objects.create(comment=comment, game=game)
+        print('Games are Loaded')

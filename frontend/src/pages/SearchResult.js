@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSearchParams } from 'react-router-dom';
 import GameCard from '../components/GameCard';
 import Pagination from '@mui/material/Pagination'
+import config from '../config';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -43,7 +44,7 @@ const SearchResult = () => {
   const [games, setGames] = useState([]);
   const [count, setCount] = useState(0)
   const navigate = useNavigate();
-  const baseUrl = 'http://localhost:8000/api';
+  const baseUrl = config.backendURL;
   const loadData = (paramsN) => {
     axios.get(`${baseUrl}/games`, {params: paramsN}).then((res) => {
       setGames(res.data.results)

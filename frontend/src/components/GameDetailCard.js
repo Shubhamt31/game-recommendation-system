@@ -5,6 +5,7 @@ import { useNavigate,useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import GameCard from '../components/GameCard';
 import axios from 'axios';
+import config from '../config';
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -22,7 +23,7 @@ const GameDetailCard = ({ game }) => {
   const { id } = useParams();
   const classes = useStyles();
   const navigate = useNavigate();
-  const baseUrl = 'http://localhost:8000/api';
+  const baseUrl = config.backendURL;
   useEffect(() => {
     axios.get(`${baseUrl}/games/${id}`).then((res) => {
       setRecomendations(res.data.recommended_games);

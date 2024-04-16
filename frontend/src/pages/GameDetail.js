@@ -6,6 +6,7 @@ import {  useParams } from 'react-router-dom';
 import GameDetailCard from '../components/GameDetailCard';
 import GameCard from '../components/GameCard';
 import { makeStyles } from '@material-ui/core/styles';
+import config from '../config';
 
 
 
@@ -43,7 +44,7 @@ const GameDetail = () => {
   const { id } = useParams();
   const classes = useStyles();
   // const navigate = useNavigate();
-  const baseUrl = 'http://localhost:8000/api';
+  const baseUrl = config.backendURL;
   useEffect(() => {
     axios.get(`${baseUrl}/games/${id}`).then((res) => {
       setGame(res.data.data);
