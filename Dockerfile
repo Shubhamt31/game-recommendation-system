@@ -22,4 +22,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 ENV PATH="${PATH}:/app/.local/bin:/home/${APP_USER}/.local/bin"
 
 COPY . .
+RUN python manage.py migrate && python manage.py load_init_data && python manage.py load_images && python manage.py make_ml_model
 EXPOSE 8000
