@@ -1,16 +1,26 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
+
 class Organization(models.Model):
-    name = models.CharField(max_length=255)
-class Genre(models.Model):
+    """
+    Model to represent organizations associated with games.
+    """
     name = models.CharField(max_length=255)
 
-# Create your models here.
+class Genre(models.Model):
+    """
+    Model to represent genres of games.
+    """
+    name = models.CharField(max_length=255)
+
 class Game(models.Model):
+    """
+    Model to represent a game.
+    """
     title = models.CharField(max_length=100)
     release_date = models.DateField(null=True)
     organizations_raw = ArrayField(models.CharField(max_length=200))
-    orgnaizations = models.ManyToManyField(Organization)
+    organizations = models.ManyToManyField(Organization)
     rating = models.FloatField(null=True)
     times_listed = models.IntegerField()
     number_of_reviews = models.IntegerField()
@@ -22,8 +32,11 @@ class Game(models.Model):
     playing = models.IntegerField()
     backlogs = models.IntegerField()
     wishlist = models.IntegerField()
-    image_url=models.CharField(max_length=2000, null=True)
+    image_url = models.CharField(max_length=2000, null=True)
 
 class Review(models.Model):
+    """
+    Model to represent a review of a game.
+    """
     comment = models.CharField(max_length=4000)
     game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name='reviews')

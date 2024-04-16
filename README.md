@@ -21,7 +21,15 @@ Our recommendation model suggests games based on a blend of their summaries and 
 
 To run this project,
 
-Copy the .env.example to .env and modify the values as per need
+Copy the .env.example to .env and modify the values as per need.
+
+## Setup and Execution flowdigram 
+
+
+![App Screenshot](https://res.cloudinary.com/dnzbo3wfx/image/upload/v1713206636/Screenshot_2024-04-15_235552_zbfzau.png)
+
+![App Screenshot](https://res.cloudinary.com/dnzbo3wfx/image/upload/v1713206637/Screenshot_2024-04-16_001253_b95afv.png)
+
 
 ## Installation
 
