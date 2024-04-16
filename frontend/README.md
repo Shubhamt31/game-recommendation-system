@@ -8,36 +8,10 @@ Welcome to Game Scout - your ultimate destination for discovering new games and 
 Game Scout is more than just a game scouting website - it's your go-to platform for finding your next gaming adventure. Whether you're a hardcore gamer seeking the latest releases or a casual player looking for hidden gems, Game Scout has got you covered.
 ## Features
 
-- Search: Effortlessly find your desired games through our powerful search functionality.
-- Summaries: Get quick insights into game details and summaries to make informed decisions.
-- Reviews & Ratings: Explore user reviews and ratings to gauge the quality of games.
-- Personalized Suggestions: Benefit from our machine learning algorithms that tailor suggestions based on your search history and preferences.
-## Installation
-
-With Docker ( using docker-compose file ):
-
-If you wish to use Windows as the host, it's a good idea to read through the
-https://docs.docker.com/desktop/install/windows-install/
-
-If you wish to use Mac as the host, it's a good idea to read through the
-https://docs.docker.com/desktop/install/mac-install/
-
-Once the docker is installed. Follow the following steps :-
-
-1. ##### Clone the Gituhub Repository.
-```[/bin/bash]
-    https://github.com/Shubhamt31/game-recommendation-frontend.git
-```
-
-2. ##### Then cd into the directory.
-```[/bin/bash]
-    cd /game-recommendation-frontend
-```
-3. ##### Use Docker command to create the container and use them.
-```[/bin/bash]
-    docker-compose up
-```
-
+- **Search**: Effortlessly find your desired games through our powerful search functionality.
+- **Summaries**: Get quick insights into game details and summaries to make informed decisions.
+- **Reviews & Ratings**: Explore user reviews and ratings to gauge the quality of games.
+- **Personalized Suggestions: Benefit from our machine learning algorithms that tailor suggestions based on your search history and preferences.
 
 
 ## File Structure and Process Diagram
