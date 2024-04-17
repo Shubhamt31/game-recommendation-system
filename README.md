@@ -36,7 +36,7 @@ Once the docker is installed. Follow the following steps :-
 
 2. ##### Then cd into the directory.
 ```[/bin/bash]
-    cd /game-recommendation-system
+    cd game-recommendation-system
 ```
 3. copy the .env file
 ```[/bin/bash]
